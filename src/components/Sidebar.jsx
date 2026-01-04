@@ -1,4 +1,6 @@
 import { sidebarData } from "../data/sidebarData";
+import PopularFilters from "./PopularFilters";
+
 import LOGO from "../images/logo.jpeg";
 
 function Sidebar() {
@@ -20,6 +22,8 @@ function Sidebar() {
             {item.label}
           </button>
         ))}
+
+        <PopularFilters />
       </nav>
     </aside>
   );
