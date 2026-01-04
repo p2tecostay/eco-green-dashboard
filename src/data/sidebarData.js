@@ -6,5 +6,4 @@ export const sidebarData = [
   { id: 5, label: "Bookings" },
   { id: 6, label: "Message" },
   { id: 7, label: "Help" },
-  { id: 8, label: "Setting" },
 ];

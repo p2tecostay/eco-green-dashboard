@@ -4,13 +4,14 @@ import RecentSearches from "./components/RecentSearches";
 
 function App() {
   return (
-    <div className="flex h-screen bg-gray-50">
-      <Sidebar />
-
-      <main className="p-8 bg-gray-50 min-h-screen">
-        <Header />
-        <RecentSearches />
-      </main>
+    <div className="min-h-screen bg-gray-100">
+      <div className="flex h-screen">
+        <Sidebar />
+        <div className="flex-1 flex flex-col p-4">
+          <Header />
+          <RecentSearches />
+        </div>
+      </div>
     </div>
   );
 }
