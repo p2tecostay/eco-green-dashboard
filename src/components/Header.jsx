@@ -13,10 +13,11 @@ function Header() {
 
           <div>
             <h1 className="text-xl font-semibold text-gray-900">
-              Where will you go, Alex?
+              Sign In or Register
             </h1>
             <p className="text-sm text-gray-500">
-              Find your dream staycation in any part of the world
+              Destination Offers, Festive Experiences, Loyalty and
+              Sustainability
             </p>
           </div>
         </div>
