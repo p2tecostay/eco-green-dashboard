@@ -1,15 +1,16 @@
-import Sidebar from "./components/layout/Sidebar";
-import Header from "./components/layout/Header";
+import Sidebar from "./components/Sidebar";
+import Header from "./components/Header";
+import RecentSearches from "./components/RecentSearches";
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-100">
-      <div className="flex h-screen">
-        <Sidebar />
-        <div className="flex-1 flex flex-col">
-          <Header />
-        </div>
-      </div>
+    <div className="flex h-screen bg-gray-50">
+      <Sidebar />
+
+      <main className="p-8 bg-gray-50 min-h-screen">
+        <Header />
+        <RecentSearches />
+      </main>
     </div>
   );
 }
