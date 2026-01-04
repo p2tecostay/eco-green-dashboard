@@ -17,7 +17,7 @@ function RecentSearches() {
             key={item.id}
             image={item.image}
             title={item.title}
-            date={item.date}
+            roomtype={item.roomtype}
             price={item.price}
           />
         ))}

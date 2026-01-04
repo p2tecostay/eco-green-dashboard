@@ -1,4 +1,4 @@
-function LocationCard({ image, title, date, price }) {
+function LocationCard({ image, title, roomtype, price }) {
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
       <img
@@ -11,7 +11,7 @@ function LocationCard({ image, title, date, price }) {
       <div className="p-4">
         <h3 className="text-sm font-semibold text-sky-600">{title}</h3>
 
-        <p className="text-xs text-gray-500 mt-1">{date}</p>
+        <p className="text-xs text-gray-500 mt-1">{roomtype}</p>
 
         <p className="text-sm font-medium text-gray-900 mt-2">{price}</p>
       </div>

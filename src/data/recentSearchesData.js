@@ -1,27 +1,27 @@
-import Cancun from "../images/cancun.jpg";
-import Madeira from "../images/madeira.jpg";
-import Barcelona from "../images/barcelona.jpg";
+import Family from "../images/family.jpg";
+import Standard from "../images/standard.jpg";
+import Deluxe from "../images/deluxe.jpg";
 
 export const recentSearchesData = [
   {
     id: 1,
-    title: "Cancun, Mexico",
-    date: "1–30 October, 2 People",
+    title: "Residential Suites",
+    roomtype: "Family Room",
     price: "From €58",
-    image: Cancun,
+    image: Family,
   },
   {
     id: 2,
-    title: "Madeira, Portugal",
-    date: "8–15 November, 2 People",
+    title: "Premium Suites",
+    roomtype: "Standard Room With Mountain View",
     price: "From €165",
-    image: Madeira,
+    image: Standard,
   },
   {
     id: 3,
-    title: "Barcelona, Spain",
-    date: "6–9 September, 2 People",
+    title: "Skydale Inn",
+    roomtype: "Deluxe Room",
     price: "From €268",
-    image: Barcelona,
+    image: Deluxe,
   },
 ];
