@@ -21,7 +21,7 @@ function Header() {
   const [selectedCurrency, setSelectedCurrency] = useState(currencies[0]);
 
   return (
-    <header className="bg-white border-b border-gray-200 px-6 py-4">
+    <header className="border-b border-gray-200 px-6 py-4">
       <div className="flex items-center justify-between">
         {/* LEFT */}
         <div className="flex items-center gap-6">
@@ -45,7 +45,7 @@ function Header() {
                 type="text"
                 placeholder="Search..."
                 className="w-full pl-10 py-2 rounded-lg
-                  bg-gray-100 border border-gray-200
+                  bg-gray-100 border border-slate-300
                   text-gray-900 placeholder-gray-400
                   focus:outline-none focus:ring-2 focus:ring-green-300"
               />

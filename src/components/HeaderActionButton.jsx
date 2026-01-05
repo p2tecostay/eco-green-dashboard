@@ -7,7 +7,7 @@ function HeaderActionButton({ label, active, onClick }) {
         ${
           active
             ? "bg-green-600 text-white"
-            : "text-gray-700 border border-gray-200 hover:bg-gray-100"
+            : "text-gray-700 border border-slate-300 hover:bg-gray-100"
         }`}
     >
       {label}
