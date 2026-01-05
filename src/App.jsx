@@ -1,6 +1,7 @@
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import RecentSearches from "./components/RecentSearches";
+import DatePickerComp from "../src/components/DatePickerComp";
 
 function App() {
   return (
