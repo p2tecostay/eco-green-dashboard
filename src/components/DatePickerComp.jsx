@@ -14,8 +14,8 @@ function DatePickerComponent() {
           selected={startDate}
           onChange={(date) => setStartDate(date)}
           placeholderText="Select check-in date"
-          className="p-2 border border-gray-300 rounded-md mt-2"
-          dateFormat="yyyy/MM/dd"
+          className="p-2 border border-gray-300 rounded-md"
+          dateFormat="dd/MM/yyyy"
         />
       </div>
       <div>
@@ -23,9 +23,9 @@ function DatePickerComponent() {
           selected={endDate}
           onChange={(date) => setEndDate(date)}
           placeholderText="Select check-out date"
-          className="p-2 border border-gray-300 rounded-md mt-2"
-          dateFormat="yyyy/MM/dd"
-          minDate={startDate} // Disable dates before the check-in date
+          className="p-2 border border-gray-300 rounded-md"
+          dateFormat="dd/MM/yyyy"
+          minDate={startDate}
         />
       </div>
     </div>
