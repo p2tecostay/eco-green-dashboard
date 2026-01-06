@@ -26,8 +26,8 @@ function Sidebar() {
         {/* Google Map - Hyderabad */}
         <div className="rounded-lg overflow-hidden border border-gray-200">
           <iframe
-            title="Hyderabad Map"
-            src="https://www.google.com/maps?q=Hyderabad,India&z=12&output=embed"
+            title="Deepu Farms 2 Location"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3799.0670191793934!2d78.4409847!3d17.7885471!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bcc770020f406ed%3A0x871d289f9b74fb4d!2sDeepu%20Farms%202!5e0!3m2!1sen!2sae!4v1767700360131!5m2!1sen!2sae"
             className="w-full h-40"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
