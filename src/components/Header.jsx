@@ -64,9 +64,9 @@ function Header() {
             <button
               onClick={() => setGuestsOpen(!guestsOpen)}
               className="flex items-center gap-2 px-8 py-2 rounded-lg
-      bg-gray-100 border border-slate-300
-      text-sm text-gray-700
-      hover:bg-gray-200 transition whitespace-nowrap"
+              bg-gray-100 border border-slate-300
+              text-sm text-gray-700
+              hover:bg-gray-200 transition whitespace-nowrap"
             >
               Guests: {adults + children}
               <ChevronDown className="w-4 h-4 text-gray-500" />

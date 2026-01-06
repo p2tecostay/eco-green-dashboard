@@ -1,7 +1,7 @@
 import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import RecentSearches from "./components/RecentSearches";
-import DatePickerComp from "../src/components/DatePickerComp";
+import BannerVideos from "./components/BannerVideos";
 
 function App() {
   return (
@@ -10,6 +10,7 @@ function App() {
         <Sidebar />
         <div className="flex-1 flex flex-col p-4">
           <Header />
+          <BannerVideos />
           <RecentSearches />
         </div>
       </div>
