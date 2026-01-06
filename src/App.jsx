@@ -2,6 +2,7 @@ import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import RecentSearches from "./components/RecentSearches";
 import BannerVideos from "./components/BannerVideos";
+import AvailableRooms from "./components/AvailableRooms";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Header />
           <BannerVideos />
           <RecentSearches />
+          <AvailableRooms />
         </div>
       </div>
     </div>

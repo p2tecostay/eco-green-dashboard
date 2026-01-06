@@ -8,6 +8,8 @@ export const recentSearchesData = [
     title: "Residential Suites",
     roomtype: "Family Room",
     price: "From €58",
+    avgRating: 4.6,
+    reviews: 56,
     image: Family,
   },
   {
@@ -15,6 +17,8 @@ export const recentSearchesData = [
     title: "Premium Suites",
     roomtype: "Standard Room With Mountain View",
     price: "From €165",
+    avgRating: 4.0,
+    reviews: 75,
     image: Standard,
   },
   {
@@ -22,6 +26,8 @@ export const recentSearchesData = [
     title: "Skydale Inn",
     roomtype: "Deluxe Room",
     price: "From €268",
+    avgRating: 4.2,
+    reviews: 31,
     image: Deluxe,
   },
 ];

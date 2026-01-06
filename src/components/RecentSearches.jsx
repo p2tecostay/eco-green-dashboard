@@ -17,8 +17,10 @@ function RecentSearches() {
             key={item.id}
             image={item.image}
             title={item.title}
-            roomtype={item.roomtype}
+            date={item.date}
             price={item.price}
+            avgRating={item.avgRating}
+            reviews={item.reviews}
           />
         ))}
       </div>
