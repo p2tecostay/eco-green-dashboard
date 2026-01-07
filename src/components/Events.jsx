@@ -9,7 +9,7 @@ import mph5 from "../images/rain-dance.jpg";
 
 const images = [MPH, mph1, mph2, mph3, mph4, mph5];
 
-function MultipurposeHall() {
+function Events() {
   const [isOpen, setIsOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -45,7 +45,7 @@ function MultipurposeHall() {
           <div className="md:col-span-2 cursor-pointer">
             <img
               src={MPH}
-              alt="Multipurpose Hall"
+              alt="Events"
               className="w-full h-[360px] object-cover rounded-lg"
               onClick={() => openModal(0)}
             />
@@ -113,4 +113,4 @@ function MultipurposeHall() {
   );
 }
 
-export default MultipurposeHall;
+export default Events;

@@ -2,7 +2,7 @@ import Header from "../components/Header";
 import BannerVideos from "../components/BannerVideos";
 import RecentSearches from "../components/RecentSearches";
 import AvailableRooms from "../components/AvailableRooms";
-import MultipurposeHall from "../components/MultipurposeHall";
+import Events from "../components/Events";
 
 function Dashboard() {
   return (
@@ -11,7 +11,7 @@ function Dashboard() {
       <BannerVideos />
       <RecentSearches />
       <AvailableRooms />
-      <MultipurposeHall />
+      <Events />
     </>
   );
 }
