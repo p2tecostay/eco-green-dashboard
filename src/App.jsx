@@ -1,22 +1,29 @@
-import Sidebar from "./components/Sidebar";
-import Header from "./components/Header";
-import RecentSearches from "./components/RecentSearches";
-import BannerVideos from "./components/BannerVideos";
-import AvailableRooms from "./components/AvailableRooms";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import MainLayout from "./layouts/MainLayout";
+import Dashboard from "./pages/Dashboard";
+import Admin from "./pages/Admin";
+import Membership from "./pages/Membership";
 
 function App() {
   return (
-    <div className="min-h-screen bg-gray-100">
-      <div className="flex h-screen">
-        <Sidebar />
-        <div className="flex-1 flex flex-col p-4">
-          <Header />
-          <BannerVideos />
-          <RecentSearches />
-          <AvailableRooms />
-        </div>
-      </div>
-    </div>
+    <Router>
+      <Routes>
+        {/* MAIN APP LAYOUT */}
+        <Route element={<MainLayout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="admin" element={<Admin />} />
+          <Route path="membership" element={<Membership />} />
+        </Route>
+
+        {/* FALLBACK */}
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Router>
   );
 }
 

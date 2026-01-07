@@ -6,6 +6,8 @@ import Style from "./Style";
 import Brands from "./Brands";
 import PropertyTypes from "./PropertyTypes";
 
+import { NavLink } from "react-router-dom";
+
 function Sidebar() {
   return (
     <aside className="w-74 bg-white border-r border-gray-200 p-6">
@@ -13,17 +15,17 @@ function Sidebar() {
 
       <nav className="space-y-2">
         {sidebarData.map((item) => (
-          <button
-            key={item.id}
-            className={`w-full px-3 py-2 rounded-lg text-sm text-left
-              ${
-                item.active
-                  ? "bg-sky-100 text-sky-600"
-                  : "text-gray-500 hover:bg-gray-100"
-              }`}
+          <NavLink
+            to={item.path}
+            className={({ isActive }) =>
+              `w-full block px-3 py-2 rounded-lg text-sm
+     ${
+       isActive ? "bg-sky-100 text-sky-600" : "text-gray-500 hover:bg-gray-100"
+     }`
+            }
           >
             {item.label}
-          </button>
+          </NavLink>
         ))}
 
         {/* Google Map - Hyderabad */}
