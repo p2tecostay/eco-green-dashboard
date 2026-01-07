@@ -44,7 +44,7 @@ function AdminCharts() {
                 <XAxis dataKey="name" />
                 <YAxis />
                 <Tooltip />
-                <Bar dataKey="revenue" />
+                <Bar dataKey="revenue" fill="#22c55e" />
               </BarChart>
             </ResponsiveContainer>
           </div>
