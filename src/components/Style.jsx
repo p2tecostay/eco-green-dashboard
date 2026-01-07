@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { popularFiltersData } from "../data/popularFiltersData";
+import { styleData } from "../data/styleData.js";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
-function PopularFilters() {
+function Style() {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
@@ -12,7 +12,7 @@ function PopularFilters() {
         onClick={() => setIsOpen(!isOpen)}
         className="w-full flex items-center justify-between text-left"
       >
-        <h3 className="text-sm font-semibold text-gray-900">Popular filters</h3>
+        <h3 className="text-sm font-semibold text-gray-900">Style</h3>
 
         {isOpen ? (
           <ChevronUp size={18} className="text-gray-500" />
@@ -24,7 +24,7 @@ function PopularFilters() {
       {/* Content */}
       {isOpen && (
         <div className="mt-4 space-y-3">
-          {popularFiltersData.map((filter) => (
+          {styleData.map((filter) => (
             <label
               key={filter.id}
               className="flex items-center justify-between text-sm text-gray-700 cursor-pointer"
@@ -46,4 +46,4 @@ function PopularFilters() {
   );
 }
 
-export default PopularFilters;
+export default Style;

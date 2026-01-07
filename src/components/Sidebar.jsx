@@ -1,7 +1,9 @@
 import { sidebarData } from "../data/sidebarData";
-import PopularFilters from "./PopularFilters";
-
 import LOGO from "../images/logo.jpeg";
+import Amenities from "./Amenities";
+import HotelClass from "./HotelClass";
+import Style from "./Style";
+import Brands from "./Brands";
 
 function Sidebar() {
   return (
@@ -34,7 +36,10 @@ function Sidebar() {
           />
         </div>
 
-        <PopularFilters />
+        <Amenities />
+        <HotelClass />
+        <Style />
+        <Brands />
       </nav>
     </aside>
   );
