@@ -4,6 +4,7 @@ import Amenities from "./Amenities";
 import HotelClass from "./HotelClass";
 import Style from "./Style";
 import Brands from "./Brands";
+import PropertyTypes from "./PropertyTypes";
 
 function Sidebar() {
   return (
@@ -40,6 +41,7 @@ function Sidebar() {
         <HotelClass />
         <Style />
         <Brands />
+        <PropertyTypes />
       </nav>
     </aside>
   );

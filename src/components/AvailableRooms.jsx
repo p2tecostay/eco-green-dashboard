@@ -1,6 +1,8 @@
 import { roomsData } from "../data/roomsData";
 import RoomRow from "./RoomRow";
 
+import { Heart, Star } from "lucide-react";
+
 function AvailableRooms() {
   return (
     <section className="mt-10">

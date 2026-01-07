@@ -62,7 +62,7 @@ function AuthModal({ initialType = "Sign In", onClose }) {
               hover:bg-green-700 transition"
           >
             {isForgot
-              ? "Send reset link"
+              ? "Send password reset link"
               : isSignIn
               ? "Sign In"
               : "Create Account"}
