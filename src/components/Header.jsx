@@ -4,6 +4,8 @@ import { useState } from "react";
 import HeaderActionButton from "./HeaderActionButton";
 import DatePickerComp from "./DatePickerComp";
 
+import AuthModal from "./AuthModal";
+
 const currencies = [
   { code: "EUR", label: "€ EUR" },
   { code: "USD", label: "$ USD" },
@@ -25,6 +27,9 @@ function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCurrency, setSelectedCurrency] = useState(currencies[0]);
 
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [authType, setAuthType] = useState(null);
+
   return (
     <header className="border-b border-gray-200 px-6 py-4">
       <div className="flex items-center justify-between">
@@ -37,7 +42,11 @@ function Header() {
                 key={action.id}
                 label={action.label}
                 active={activeAction === action.label}
-                onClick={() => setActiveAction(action.label)}
+                onClick={() => {
+                  setActiveAction(action.label);
+                  setAuthType(action.label);
+                  setAuthModalOpen(true);
+                }}
               />
             ))}
           </div>
@@ -149,6 +158,13 @@ function Header() {
           )}
         </div>
       </div>
+
+      {authModalOpen && (
+        <AuthModal
+          initialType={authType}
+          onClose={() => setAuthModalOpen(false)}
+        />
+      )}
     </header>
   );
 }
