@@ -10,18 +10,35 @@ import { NavLink } from "react-router-dom";
 
 function Sidebar() {
   return (
-    <aside className="w-74 bg-white border-r border-gray-200 p-6">
+    <aside
+      className="
+    w-72 bg-white border-r border-gray-200 p-6
+    overflow-y-auto
+    max-h-screen
+    lg:overflow-visible lg:max-h-none
+  "
+    >
       <img src={LOGO} alt="Logo" className="hidden lg:block w-auto mb-4" />
 
       <nav className="space-y-2">
         {sidebarData.map((item) => (
           <NavLink
+            key={item.path}
             to={item.path}
+            onClick={() => {
+              if (window.innerWidth < 1024) {
+                document.body.style.overflow = "auto";
+                const closeEvent = new CustomEvent("closeSidebar");
+                window.dispatchEvent(closeEvent);
+              }
+            }}
             className={({ isActive }) =>
-              `w-full block px-3 py-2 rounded-lg text-sm
-     ${
-       isActive ? "bg-sky-100 text-sky-600" : "text-gray-500 hover:bg-gray-100"
-     }`
+              `block px-3 py-2 rounded-lg text-sm
+       ${
+         isActive
+           ? "bg-sky-100 text-sky-600"
+           : "text-gray-500 hover:bg-gray-100"
+       }`
             }
           >
             {item.label}
