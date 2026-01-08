@@ -11,7 +11,7 @@ import { NavLink } from "react-router-dom";
 function Sidebar() {
   return (
     <aside className="w-74 bg-white border-r border-gray-200 p-6">
-      <img src={LOGO} alt="Logo" className="w-auto mb-4" />
+      <img src={LOGO} alt="Logo" className="hidden lg:block w-auto mb-4" />
 
       <nav className="space-y-2">
         {sidebarData.map((item) => (

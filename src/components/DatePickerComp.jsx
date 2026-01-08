@@ -8,7 +8,8 @@ function DatePickerComponent() {
   const [endDate, setEndDate] = useState(null);
 
   return (
-    <div className="flex justify-center items-center space-x-4 p-4">
+    // <div className="flex justify-center items-center space-x-4 p-4">
+    <div className="flex flex-col sm:flex-row gap-2 w-full">
       <div>
         <DatePicker
           selected={startDate}

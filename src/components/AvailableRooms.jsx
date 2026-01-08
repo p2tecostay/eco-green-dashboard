@@ -1,8 +1,6 @@
 import { roomsData } from "../data/roomsData";
 import RoomRow from "./RoomRow";
 
-import { Heart, Star } from "lucide-react";
-
 function AvailableRooms() {
   return (
     <section className="mt-10">
@@ -10,7 +8,8 @@ function AvailableRooms() {
         Available rooms
       </h3>
 
-      <div className="space-y-4">
+      {/* GRID */}
+      <div className="grid grid-cols-1 gap-4">
         {roomsData.map((room) => (
           <RoomRow key={room.id} {...room} />
         ))}
