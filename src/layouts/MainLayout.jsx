@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Sidebar from "../components/Sidebar";
 import { Menu, X, ChevronDown } from "lucide-react";
@@ -14,6 +14,16 @@ function MainLayout() {
   ];
   const [selectedCurrency, setSelectedCurrency] = useState(currencies[0]);
   const [currencyOpen, setCurrencyOpen] = useState(false);
+
+  useEffect(() => {
+    if (window.innerWidth < 1024) {
+      document.body.style.overflow = sidebarOpen ? "hidden" : "auto";
+    }
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [sidebarOpen]);
 
   return (
     <div className="min-h-screen bg-gray-100">
@@ -34,10 +44,8 @@ function MainLayout() {
             transform transition-transform duration-300
             ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
             lg:translate-x-0
-            overflow-y-auto max-h-screen scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100
           `}
         >
-          {/* Mobile close */}
           <div className="flex justify-end p-4 lg:hidden">
             <button onClick={() => setSidebarOpen(false)}>
               <X className="w-6 h-6 text-gray-600" />
