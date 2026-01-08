@@ -24,7 +24,9 @@ function Admin() {
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold text-gray-800 mb-6">Admin Panel</h1>
+      <h1 className="text-2xl font-semibold text-gray-800 mt-6 mb-3">
+        Admin Panel
+      </h1>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {cards.map((card) => {
