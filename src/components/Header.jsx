@@ -2,6 +2,9 @@ import { Search, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import HeaderActionButton from "./HeaderActionButton";
 import DatePickerComp from "./DatePickerComp";
+import AuthModal from "./auth/AuthModal";
+import SignInForm from "./auth/SignInForm";
+import RegisterForm from "./auth/RegisterForm";
 
 const authActions = [
   { id: 1, label: "Sign In" },
@@ -13,6 +16,9 @@ function Header() {
   const [guestsOpen, setGuestsOpen] = useState(false);
   const [adults, setAdults] = useState(2);
   const [children, setChildren] = useState(0);
+
+  const [authOpen, setAuthOpen] = useState(false);
+  const [authMode, setAuthMode] = useState("signin"); // signin | register | forgot
 
   return (
     <header className="border-b border-gray-200 px-4 py-4">
@@ -29,7 +35,10 @@ function Header() {
                 active={activeAction === action.label}
                 onClick={() => {
                   setActiveAction(action.label);
-                  // setAuthModalOpen(true);
+                  setAuthMode(
+                    action.label === "Sign In" ? "signin" : "register"
+                  );
+                  setAuthOpen(true);
                 }}
               />
             ))}
@@ -99,6 +108,19 @@ function Header() {
           </div>
         </div>
       </div>
+
+      {authOpen && (
+        <AuthModal
+          initialType={
+            authMode === "signin"
+              ? "Sign In"
+              : authMode === "register"
+              ? "Register"
+              : "Forgot"
+          }
+          onClose={() => setAuthOpen(false)}
+        />
+      )}
     </header>
   );
 }
