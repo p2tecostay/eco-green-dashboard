@@ -7,6 +7,11 @@ import SignInForm from "./auth/SignInForm";
 import RegisterForm from "./auth/RegisterForm";
 import ForgotPasswordForm from "./auth/ForgotPasswordForm";
 
+// const authActions = [
+//   { id: 1, label: "Sign In" },
+//   { id: 2, label: "Register" },
+// ];
+
 const currencies = [
   { code: "EUR", label: "€ EUR" },
   { code: "USD", label: "$ USD" },
@@ -23,9 +28,9 @@ function Header() {
   const [adults, setAdults] = useState(2);
   const [children, setChildren] = useState(0);
 
-  const [authDropdownOpen, setAuthDropdownOpen] = useState(false); // Sign In dropdown
-  const [registerDropdownOpen, setRegisterDropdownOpen] = useState(false); // Register dropdown
-  const [authView, setAuthView] = useState(null); // modal: "signin" | "register" | "forgot"
+  const [authDropdownOpen, setAuthDropdownOpen] = useState(false);
+  const [registerDropdownOpen, setRegisterDropdownOpen] = useState(false);
+  const [authView, setAuthView] = useState(null); // "signin" | "register" | "forgot"
 
   const [selectedSignInRole, setSelectedSignInRole] = useState(null);
   const [selectedRegisterRole, setSelectedRegisterRole] = useState(null);
@@ -48,7 +53,7 @@ function Header() {
                   setActiveAction("Sign In");
                   setAuthDropdownOpen((prev) => !prev);
                   setRegisterDropdownOpen(false);
-                  setAuthView(null); // close modal until role is selected
+                  setAuthView(null);
                 }}
               />
               {authDropdownOpen && (
@@ -221,12 +226,15 @@ function Header() {
               onSwitchToRegister={() => setAuthView("register")}
             />
           )}
+
           {authView === "register" && (
             <RegisterForm
+              role={selectedRegisterRole || "User"} // <-- Pass selected role to RegisterForm
               onSuccess={() => setAuthView(null)}
               onSwitchToSignIn={() => setAuthView("signin")}
             />
           )}
+
           {authView === "forgot" && (
             <ForgotPasswordForm onBack={() => setAuthView("signin")} />
           )}
