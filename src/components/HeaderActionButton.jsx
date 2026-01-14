@@ -2,12 +2,12 @@ function HeaderActionButton({ label, active, onClick }) {
   return (
     <button
       onClick={onClick}
-      className={`px-4 py-2 rounded-lg text-sm font-medium transition
+      className={`bg-white/90 text-green-700 px-4 py-2 rounded-lg text-sm font-medium transition
         whitespace-nowrap
         ${
           active
-            ? "bg-green-600 text-white"
-            : "text-gray-700 border border-slate-300 hover:bg-gray-100"
+            ? "text-green-700"
+            : "text-gray-700 border border-slate-300 hover:bg-white/90"
         }`}
     >
       {label}
