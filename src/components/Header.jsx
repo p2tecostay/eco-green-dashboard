@@ -1,6 +1,5 @@
-import { Menu } from "lucide-react";
-import { useState } from "react";
-import { Search, Users } from "lucide-react";
+import { Menu, ChevronLeft, Search, Users } from "lucide-react";
+import { useState, useEffect } from "react";
 import HeaderActionButton from "./HeaderActionButton";
 import DatePickerComp from "./DatePickerComp";
 import AuthModal from "./auth/AuthModal";
@@ -16,40 +15,40 @@ const currencies = [
 ];
 
 function Header({ onMenuClick }) {
-  const [activeAction, setActiveAction] = useState(null); // "signin" | "register" | "forgot"
+  const [activeAction, setActiveAction] = useState(null);
 
+  // Mobile right-side panel
+  const [mobilePanelOpen, setMobilePanelOpen] = useState(false);
+
+  // Guests
   const [guestsOpen, setGuestsOpen] = useState(false);
   const [rooms, setRooms] = useState(1);
   const [adults, setAdults] = useState(2);
   const [children, setChildren] = useState(0);
 
+  // Currency
   const [selectedCurrency, setSelectedCurrency] = useState(currencies[0]);
   const [currencyOpen, setCurrencyOpen] = useState(false);
 
-  return (
-    <header
-      className="
-    w-full
-    bg-gradient-to-r from-green-700 via-green-600 to-emerald-600
-    text-white
-    border-b border-green-800
-    px-4 py-4 mb-8
-    relative
-  "
-    >
-      <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
-        {/* MOBILE SIDEBAR TOGGLE */}
-        <button
-          onClick={onMenuClick}
-          className="lg:hidden flex items-center justify-center w-10 h-10 rounded-lg bg-white/20 hover:bg-white/30 transition"
-        >
-          <Menu className="w-6 h-6 text-white" />
-        </button>
+  useEffect(() => {
+    if (mobilePanelOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
 
-        {/* EXISTING HEADER CONTENT */}
-        <div className="flex flex-col lg:flex-row gap-3 lg:gap-6 w-full">
-          {/* Auth buttons */}
-          <div className="flex gap-2 w-full lg:w-auto">
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [mobilePanelOpen]);
+
+  return (
+    <>
+      {/* ================= DESKTOP / LAPTOP HEADER ================= */}
+      <header className="hidden lg:block w-full bg-gradient-to-r from-green-700 via-green-600 to-emerald-600 text-white px-6 py-4">
+        <div className="flex items-center justify-between gap-6">
+          {/* Auth */}
+          <div className="flex gap-2">
             <HeaderActionButton
               label="Sign In"
               active={activeAction === "signin"}
@@ -63,133 +62,74 @@ function Header({ onMenuClick }) {
           </div>
 
           {/* Search */}
-          <div className="w-full lg:max-w-sm">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
-              <input
-                type="text"
-                placeholder="Search..."
-                className="
-  w-full pl-10 py-2 rounded-lg
-  bg-white/90 border border-white/40
-  text-gray-900 placeholder-gray-500
-  focus:outline-none focus:ring-2 focus:ring-emerald-300
-"
-              />
-            </div>
+          <div className="w-80 relative">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search..."
+              className="w-full pl-10 py-2 rounded-lg text-gray-900 bg-white/90 "
+            />
           </div>
 
           {/* Date + Guests + Currency */}
-          <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto items-start lg:items-center">
+          <div className="flex items-center gap-3">
             <DatePickerComp />
 
-            {/* Guests + Rooms */}
-            <div className="relative whitespace-nowrap ">
+            {/* Guests */}
+            <div className="relative whitespace-nowrap">
               <button
                 onClick={() => setGuestsOpen(!guestsOpen)}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg
-      bg-white/90 border border-white/40
-  text-gray-900 placeholder-gray-500
-  focus:outline-none focus:ring-2 focus:ring-emerald-300
-      hover:bg-gray-200 transition w-full sm:w-auto"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/90 text-gray-900"
               >
-                <Users className="w-5 h-6" />
+                <Users className="w-5 h-5" />
                 {rooms} Room{rooms > 1 && "s"}, {adults} Adult
                 {adults > 1 && "s"}, {children} Child{children > 1 && "ren"}
               </button>
 
               {guestsOpen && (
-                <div className="absolute left-0 mt-2 w-64 bg-white border border-gray-200 rounded-lg shadow-lg z-50 p-4 space-y-4">
-                  {/* ROOMS */}
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium text-gray-700">
-                      Rooms
-                    </span>
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() => setRooms(Math.max(1, rooms - 1))}
-                        className="w-8 h-8 rounded-full border border-gray-300 text-gray-700 flex items-center justify-center"
-                      >
-                        -
-                      </button>
-                      <span className="w-6 text-center text-gray-800">
-                        {rooms}
-                      </span>
-                      <button
-                        onClick={() => setRooms(rooms + 1)}
-                        className="w-8 h-8 rounded-full border border-gray-300 text-gray-700 flex items-center justify-center"
-                      >
-                        +
-                      </button>
+                <div className="absolute right-0 mt-2 w-64 bg-white rounded-lg shadow-lg p-4 z-50 space-y-4">
+                  {[
+                    ["Rooms", rooms, setRooms, 1],
+                    ["Adults", adults, setAdults, 1],
+                    ["Children", children, setChildren, 0],
+                  ].map(([label, value, setter, min]) => (
+                    <div
+                      key={label}
+                      className="flex justify-between items-center text-gray-800"
+                    >
+                      <span>{label}</span>
+                      <div className="flex gap-2 items-center">
+                        <button
+                          onClick={() => setter(Math.max(min, value - 1))}
+                          className="w-8 h-8 border rounded-full"
+                        >
+                          -
+                        </button>
+                        <span>{value}</span>
+                        <button
+                          onClick={() => setter(value + 1)}
+                          className="w-8 h-8 border rounded-full"
+                        >
+                          +
+                        </button>
+                      </div>
                     </div>
-                  </div>
-
-                  {/* ADULTS */}
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium text-gray-700">
-                      Adults
-                    </span>
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() => setAdults(Math.max(1, adults - 1))}
-                        className="w-8 h-8 rounded-full border border-gray-300 text-gray-700 flex items-center justify-center"
-                      >
-                        -
-                      </button>
-                      <span className="w-6 text-center text-gray-800">
-                        {adults}
-                      </span>
-                      <button
-                        onClick={() => setAdults(adults + 1)}
-                        className="w-8 h-8 rounded-full border border-gray-300 text-gray-700 flex items-center justify-center"
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* CHILDREN */}
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-medium text-gray-700">
-                      Children
-                    </span>
-                    <div className="flex items-center gap-2">
-                      <button
-                        onClick={() => setChildren(Math.max(0, children - 1))}
-                        className="w-8 h-8 rounded-full border border-gray-300 text-gray-700 flex items-center justify-center"
-                      >
-                        -
-                      </button>
-                      <span className="w-6 text-center text-gray-800">
-                        {children}
-                      </span>
-                      <button
-                        onClick={() => setChildren(children + 1)}
-                        className="w-8 h-8 rounded-full border border-gray-300 text-gray-700 flex items-center justify-center"
-                      >
-                        +
-                      </button>
-                    </div>
-                  </div>
+                  ))}
                 </div>
               )}
             </div>
 
-            {/* Currency selector */}
-            <div className="relative hidden lg:block">
+            {/* Currency */}
+            <div className="relative whitespace-nowrap">
               <button
                 onClick={() => setCurrencyOpen(!currencyOpen)}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg
-      bg-white/90 border border-white/40
-  text-gray-900 placeholder-gray-500
-  focus:outline-none focus:ring-2 focus:ring-emerald-300
-      hover:bg-gray-200 transition w-full sm:w-auto whitespace-nowrap"
+                className="px-4 py-2 rounded-lg bg-white/90 text-gray-900"
               >
                 {selectedCurrency.label}
               </button>
 
               {currencyOpen && (
-                <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+                <div className="absolute right-0 mt-2 w-32 bg-white rounded-lg shadow-lg z-50">
                   {currencies.map((c) => (
                     <button
                       key={c.code}
@@ -197,11 +137,7 @@ function Header({ onMenuClick }) {
                         setSelectedCurrency(c);
                         setCurrencyOpen(false);
                       }}
-                      className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-100 ${
-                        selectedCurrency.code === c.code
-                          ? "text-green-600 font-medium"
-                          : "text-gray-700"
-                      }`}
+                      className="block w-full px-4 py-2 text-left hover:bg-gray-100 text-gray-800"
                     >
                       {c.label}
                     </button>
@@ -211,38 +147,105 @@ function Header({ onMenuClick }) {
             </div>
           </div>
         </div>
-      </div>
+      </header>
 
-      {/* Auth Modal */}
+      {/* ================= MOBILE LEFT HAMBURGER ================= */}
+      <button
+        onClick={onMenuClick}
+        className="lg:hidden fixed left-4 top-4 z-50 w-10 h-10
+                   bg-emerald-600 rounded-full shadow-lg
+                   flex items-center justify-center"
+      >
+        <Menu className="w-6 h-6 text-white" />
+      </button>
+
+      {/* ================= MOBILE RIGHT SEMI-CIRCLE ================= */}
+      <button
+        onClick={() => setMobilePanelOpen(!mobilePanelOpen)}
+        className="lg:hidden fixed right-0 top-1/2 -translate-y-1/2
+                   h-16 w-10 bg-emerald-600 rounded-l-full
+                   flex items-center justify-center shadow-lg z-40"
+      >
+        <ChevronLeft
+          className={`w-5 h-5 text-white transition-transform ${
+            mobilePanelOpen ? "rotate-180" : ""
+          }`}
+        />
+      </button>
+
+      {/* ================= MOBILE SEARCH PANEL ================= */}
+      {mobilePanelOpen && (
+        <div className="fixed inset-0 z-40 flex">
+          <div
+            className="absolute inset-0 bg-black/40"
+            onClick={() => setMobilePanelOpen(false)}
+          />
+
+          <div
+            className="
+              relative ml-auto h-full
+              w-64 sm:w-72
+              bg-gradient-to-b from-green-700 via-green-600 to-emerald-600
+              text-white p-4 space-y-5 overflow-y-auto
+              flex flex-col
+            "
+          >
+            {/* MOBILE / TABLET SEARCH */}
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search..."
+                className="w-full pl-10 py-2 rounded-lg text-gray-900 bg-white/90 "
+              />
+            </div>
+
+            <div className="flex flex-col gap-3 [&_*]:!flex-col">
+              <DatePickerComp />
+            </div>
+
+            <div className="bg-white text-gray-900 rounded-lg p-4 space-y-4">
+              {[
+                ["Rooms", rooms, setRooms, 1],
+                ["Adults", adults, setAdults, 1],
+                ["Children", children, setChildren, 0],
+              ].map(([label, value, setter, min]) => (
+                <div key={label} className="flex flex-col gap-2">
+                  <span>{label}</span>
+                  <div className="flex gap-2 items-center">
+                    <button
+                      onClick={() => setter(Math.max(min, value - 1))}
+                      className="w-8 h-8 border rounded-full"
+                    >
+                      -
+                    </button>
+                    <span>{value}</span>
+                    <button
+                      onClick={() => setter(value + 1)}
+                      className="w-8 h-8 border rounded-full"
+                    >
+                      +
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ================= AUTH MODAL ================= */}
       {activeAction && (
         <AuthModal open onClose={() => setActiveAction(null)}>
-          <h2 className="text-xl font-bold text-gray-900 mb-6">
-            {activeAction === "signin"
-              ? "Sign In"
-              : activeAction === "register"
-              ? "Register"
-              : "Reset password"}
-          </h2>
-
           {activeAction === "signin" && (
             <SignInForm
-              onSuccess={() => {
-                setActiveAction(null);
-                alert("Signed in successfully!");
-              }}
               onForgot={() => setActiveAction("forgot")}
               onSwitchToRegister={() => setActiveAction("register")}
             />
           )}
 
           {activeAction === "register" && (
-            <RegisterForm
-              onSuccess={() => {
-                setActiveAction(null);
-                alert("Registered successfully!");
-              }}
-              onSwitchToSignIn={() => setActiveAction("signin")}
-            />
+            <RegisterForm onSwitchToSignIn={() => setActiveAction("signin")} />
           )}
 
           {activeAction === "forgot" && (
@@ -250,7 +253,7 @@ function Header({ onMenuClick }) {
           )}
         </AuthModal>
       )}
-    </header>
+    </>
   );
 }
 
